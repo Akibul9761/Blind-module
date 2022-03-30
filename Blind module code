@@ -1,0 +1,74 @@
+import time
+
+from espeak import espeak
+
+#Function that reads distance from the sensor
+
+def read distance():
+
+# Initialize the GPIO pins import RPİ.GPIO as GPIO
+
+GPIO.setmode (GPIO.BCM) TRIG = 27
+
+# Import the Raspberry Pi GPIO library # Use Broadcom GPIO pin numbering
+
+# GPIO pin 02
+
+ECHO = 22
+
+# GPIO pin 03
+
+GPIO.setup(TRIG, GPIO. OUT)
+
+# Set TRIG pin as output
+
+GPIO.setup(ECHO, GPIO.IN)
+
+# Set ECHO pin as input
+
+GPIO.output (TRIG, GPIO.LOW) # Initialize TRIG output as LOW
+
+# Send a HIGH signal to TRIG in order to trigger the sensor
+
+GPIO.output (TRIG, GPIO.HIGH) # Send a HIGH pulse to TRIG
+
+time.sleep(0.00001)
+
+# Wait 10 microseconds to trigger sensor
+
+GPIO.output (TRIG, GPIO.LOW) # Set TRIG back to LOW
+
+# Once the sensor is triggered, it will send an ultrasonic pulse and set
+
+# the ECHO signal to HIGH. As soon as the receiver detects the original # ultrasonic pulse, the sensor will set ECHO back to LOW.
+
+# We need capture the duration between ECHO HIGH and LOW to measure how #long the ultrasonic pulse took on its round-trip.
+
+pulse_start = time.time()
+
+while GPIO.input (ECHO) != GPIO.HIGH: pulse_start = time.time()
+
+# Record the pulse start time
+
+# Continue updating the start time # until ECHO HIGH is detected
+If this script is executed directly, run the read_distance function in a loop
+
+if name == main__': print ("Starting distance measurement! Press Ctrl+C to stop this script.") time.sleep (1)
+
+while True:
+
+# Track the current time so we an loop at regular intervals loop_start_time = time.time()
+
+# Read the distance and output the result distance = read_distance()
+
+if distance: print ("Distance: %.1f cm" % (distance))
+
+if distance <= 10: espeak.synth("obstacle is near by distance")
+
+# Find out how much time to wait until we should loop again, so that
+
+# each loop lasts 1 second
+
+time_to_wait = loop_start_time + 1 time.time()
+
+if time to wait > 0: time.sleep(time_to_wait)
